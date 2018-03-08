@@ -27,6 +27,10 @@ type Location {
   lat: Float!
   lng: Float!
 }
+input InputLocation {
+  lat: Float!
+  lng: Float!
+}
 
 
 type Carrier {
@@ -54,18 +58,15 @@ type Delivery {
   orders: [Order!]!
 }
 
-type CreateOrderPayload {
-  order: Order!
-}
-
 type Query {
   hello: String!
   getAuctionedDeliveries: String!
+  order(id: ID!): Order
 }
 
 input CreateOrderInput {
-  sourceLocation: Location!
-  destLocation: Location!
+  sourceLocation: InputLocation!
+  destLocation: InputLocation!
   type: OrderType!
   deliveryInstructions: String
   withdrawalInstructions: String
@@ -74,7 +75,7 @@ input CreateOrderInput {
 
 type Mutation {
   confirmDeliveredOrder(magicWord: String!): Boolean
-  createOrder(input: CreateOrderInput!): CreateOrderPayload
+  createOrder(input: CreateOrderInput!): Order
   order(id: ID!): Order
 }
 `

@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize'
 import { IModelDescription } from '.';
+import { IModels } from './index'
 
 export const deliveryModel: IModelDescription = {
   tableName: 'deliveries',

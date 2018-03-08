@@ -1,24 +1,53 @@
 import * as Sequelize from 'sequelize'
 import { IModelDescription } from '.';
+export interface ILocation {
+  lat: number;
+  lng: number;
+}
+export interface IOrder {
+  id?: string
+  sourceLocation: ILocation
+  destLocation: ILocation
+  type: OrderType
+  deliveryInstructions: string
+  withdrawalInstructions: string
+  status: OrderStatus
+  magicWord: string
+  carrierId: string
+  customerId: string
+}
+
+export interface IDatabaseOrder {
+  id?: string;
+  sourceLat: number;
+  sourceLng: number;
+  destLat: number;
+  destLng: number;
+  type: OrderType;
+  deliveryInstructions: string;
+  withdrawalInstructions: string;
+  contactNumber: string;
+  status: OrderStatus;
+  magicWord: string;
+  carrierId?: string;
+  customerId: string;
+}
 
 export enum OrderType {
-  TAKE_FROM_CLIENT,
-  TAKE_TO_CLIENT,
+  TAKE_FROM_CLIENT = 'TAKE_FROM_CLIENT',
+  TAKE_TO_CLIENT = 'TAKE_TO_CLIENT',
 }
 
 export enum OrderStatus {
-  ORDERED,
-  ALLOCATED,
-  CANCELLED,
-  DELIVERED,
+  ORDERED = 'ORDERED',
+  ALLOCATED = 'ALLOCATED',
+  CANCELLED = 'CANCELLED',
+  DELIVERED = 'DELIVERED',
 }
 
 export const orderModel: IModelDescription = {
   tableName: 'orders',
   attributes: {
-    name: {
-      type: Sequelize.STRING,
-    },
     sourceLat: {
       type: Sequelize.FLOAT,
     },

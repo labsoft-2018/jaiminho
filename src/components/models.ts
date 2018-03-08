@@ -18,24 +18,26 @@ export class ModelsComponent<T> implements IModelsComponent<T>, ILifecycle {
   }
 
   public start({ postgres }: { postgres: IPostgresComponent }) {
-    const modelMap = Object.keys(this.modelDescriptionMap).reduce((acc, key) => {
+    const modelMap: T = Object.keys(this.modelDescriptionMap).reduce((acc, key) => {
       const modelDescription = this.modelDescriptionMap[key]
       const model = postgres.getConnection().define(modelDescription.tableName, modelDescription.attributes)
       return {
         ...acc,
         [key]: model,
       }
-    }, {})
+    }, {}) as T
 
     Object.keys(this.modelDescriptionMap).forEach((modelKey) => {
       const model = this.modelDescriptionMap[modelKey]
       if (model.relations && typeof model.relations === 'function') {
-        model.relations(modelMap[modelKey], modelMap)
+        model.relations(modelMap[modelKey], modelMap as any)
       }
     })
 
+    this.models = modelMap
+
     // !! DANGER !!
-    postgres.getConnection().sync({ force: true })
+    // postgres.getConnection().sync({ force: true })
   }
 
   public getModels() {
