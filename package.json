@@ -13,23 +13,31 @@
     "semantic-release": "semantic-release",
     "docker:build": "docker-build --build-arg NPM_TOKEN=${NPM_TOKEN}",
     "docker:start": "docker-compose up",
-    "docker:dev": "docker-compose up -f docker-compose.dev.yml",
+    "docker:dev": "docker-compose -f ./docker-compose.dev.yml up",
     "docker:push": "docker-push"
   },
   "dependencies": {
+    "@thunder-js/toposort": "^1.0.1",
     "apollo-link": "^1.2.1",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
     "graphql": "^0.13.1",
     "graphql-tools": "^2.20.2",
     "node-fetch": "^2.0.0",
-    "promise-retry": "^1.1.1"
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "promise-retry": "^1.1.1",
+    "ramda": "^0.25.0",
+    "sequelize": "^4.35.2"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^1.0.1",
     "@semantic-release/git": "^3.0.1",
+    "@types/express": "^4.11.1",
     "@types/graphql": "^0.12.4",
     "@types/jest": "^22.1.1",
+    "@types/ramda": "^0.25.19",
+    "@types/sequelize": "^4.27.8",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "docker-build-run-push": "^3.0.0",

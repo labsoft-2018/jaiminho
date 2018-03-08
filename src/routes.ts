@@ -9,5 +9,3 @@ routes.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true,
 }))
-
-

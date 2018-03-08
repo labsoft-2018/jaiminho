@@ -1,13 +1,32 @@
 version: '3'
 services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=mypass
+    volumes:
+      - ./psql-scripts:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
   jaiminho:
-    image: labsoft-2018/jaiminho:latest
+    # image: labsoft-2018/jaiminho:latest
+    build: .
     environment:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - NPM_TOKEN="${NPM_TOKEN}"
+      # - NPM_TOKEN=${NPM_TOKEN}
+      - POSTGRES_DATABASE=postgres
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=mypass
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
     ports:
       - "3002:3002"
     volumes:
       - "./:/usr/src/app"
+    depends_on:
+      - db
+    links:
+      - db
     entrypoint: "yarn dev"

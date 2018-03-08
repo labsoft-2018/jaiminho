@@ -1,14 +1,32 @@
-import { newConfig, ENV } from './config';
-import { newService } from './service';
-import { routes } from './routes';
 
+import { routes } from './routes';
+import { PostgresComponent } from './components/postgres'
+import { IComponentMap, System } from './components/system'
+import { ConfigComponent, ENV } from './components/config'
+import { ExpressService } from './components/service';
+import { IComponents } from './components';
+
+const componentMap: IComponentMap = {
+  postgres: {
+    instance: new PostgresComponent(),
+    dependenciesList: ['config'],
+  },
+  config: {
+    instance: new ConfigComponent(ENV.dev),
+    dependenciesList: [],
+  },
+  service: {
+    instance: new ExpressService(routes),
+    dependenciesList: ['config', 'postgres'],
+  },
+}
 const main = async () => {
-  const config = newConfig(ENV.dev)
-  const service = await newService(routes, { config })
+  const system = new System<IComponents>(componentMap)
+  await system.start()
 }
 
 main()
 .catch((err) => {
-  console.log(`error:`)
   console.log(err)
+  process.exit(1)
 })
