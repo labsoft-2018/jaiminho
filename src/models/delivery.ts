@@ -4,8 +4,14 @@ import { IModelMap } from '.';
 export const deliveryModel: IModelMap = {
   tableName: 'deliveries',
   attributes: {
-    name: {
+    status: {
       type: Sequelize.STRING,
     },
+    carrierId: {
+      type: Sequelize.STRING,
+    },
+  },
+  relations: (thisModel: Sequelize.Model<any, any>, { orderModel }) => {
+    thisModel.hasMany(orderModel)
   },
 };
