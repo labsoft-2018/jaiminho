@@ -66,6 +66,12 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
 
+"@types/express-graphql@^0.0.36":
+  version "0.0.36"
+  resolved "https://registry.yarnpkg.com/@types/express-graphql/-/express-graphql-0.0.36.tgz#175f02449353cb9ba7b4b06b4a78d3c51ac2ed39"
+  dependencies:
+    "@types/express" "*"
+
 "@types/express-serve-static-core@*":
   version "4.11.1"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.11.1.tgz#f6f7212382d59b19d696677bcaa48a37280f5d45"
