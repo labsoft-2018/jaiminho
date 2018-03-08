@@ -1,0 +1,10 @@
+version: '3'
+services:
+  jaiminho:
+    image: labsoft-2018/jaiminho:latest
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    ports:
+      - "3002:3002"
+    entrypoint: "yarn start"

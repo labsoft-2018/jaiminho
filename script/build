@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euxo pipefail
+
+docker build -t labsoft-2018/jaiminho:"${1}" --build-arg NPM_TOKEN=${NPM_TOKEN} .

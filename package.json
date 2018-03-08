@@ -1,0 +1,92 @@
+{
+  "name": "@labsoft-2018/jaiminho",
+  "docker-user": "labsoft-2018",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon -e ts,graphql -x ts-node src/index.ts",
+    "build": "rimraf dist && tsc",
+    "test": "jest --watchAll",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "docker:build": "docker-build --build-arg NPM_TOKEN=${NPM_TOKEN}",
+    "docker:start": "docker-compose up",
+    "docker:dev": "docker-compose up -f docker-compose.dev.yml",
+    "docker:push": "docker-push"
+  },
+  "dependencies": {
+    "apollo-link": "^1.2.1",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.13.1",
+    "graphql-tools": "^2.20.2",
+    "node-fetch": "^2.0.0",
+    "promise-retry": "^1.1.1"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^1.0.1",
+    "@semantic-release/git": "^3.0.1",
+    "@types/graphql": "^0.12.4",
+    "@types/jest": "^22.1.1",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "docker-build-run-push": "^3.0.0",
+    "dotenv-cli": "^1.4.0",
+    "jest": "^22.2.1",
+    "nodemon": "^1.14.12",
+    "ts-jest": "^22.0.3",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.7.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "graphql"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "branch": "master",
+    "repositoryUrl": "https://github.com/labsoft-2018/jaiminho",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ],
+    "publish": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "dist/**/*.{js|css}",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      },
+      "@semantic-release/github"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/labsoft-2018/jaiminho.git"
+  }
+}
