@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize'
-import { IModelMap } from '.';
+import { IModelDescription } from '.';
 
 export enum OrderType {
   TAKE_FROM_CLIENT,
@@ -13,7 +13,7 @@ export enum OrderStatus {
   DELIVERED,
 }
 
-export const orderModel: IModelMap = {
+export const orderModel: IModelDescription = {
   tableName: 'orders',
   attributes: {
     name: {
@@ -54,6 +54,6 @@ export const orderModel: IModelMap = {
     },
     customerId: {
       type: Sequelize.STRING,
-    }
+    },
   },
 };

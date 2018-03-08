@@ -1,10 +1,18 @@
 
 import { routes } from './routes';
-import { PostgresComponent } from './components/postgres'
+import { PostgresComponent, IPostgresComponent } from './components/postgres'
 import { IComponentMap, System } from './components/system'
-import { ConfigComponent, ENV } from './components/config'
-import { ExpressService } from './components/service';
-import { IComponents } from './components';
+import { ConfigComponent, ENV, IConfigComponent } from './components/config'
+import { ExpressService, IService } from './components/service';
+import { ModelsComponent, IModelsComponent } from './components/models'
+import { modelDescriptionMap, IModels } from './models'
+
+export interface IComponents {
+  postgres: IPostgresComponent,
+  config: IConfigComponent,
+  service: IService,
+  models: IModelsComponent<IModels>,
+}
 
 const componentMap: IComponentMap = {
   postgres: {
@@ -18,6 +26,10 @@ const componentMap: IComponentMap = {
   service: {
     instance: new ExpressService(routes),
     dependenciesList: ['config', 'postgres'],
+  },
+  models: {
+    instance: new ModelsComponent(modelDescriptionMap),
+    dependenciesList: ['postgres'],
   },
 }
 const main = async () => {

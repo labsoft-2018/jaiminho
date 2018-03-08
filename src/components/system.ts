@@ -1,4 +1,4 @@
-import { ILifecycle } from './components/lifecycle'
+import { ILifecycle } from './lifecycle'
 import { topoSort } from '@thunder-js/toposort'
 
 export interface ISystem<T> {

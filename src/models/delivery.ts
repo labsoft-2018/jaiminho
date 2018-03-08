@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize'
-import { IModelMap } from '.';
+import { IModelDescription } from '.';
 
-export const deliveryModel: IModelMap = {
+export const deliveryModel: IModelDescription = {
   tableName: 'deliveries',
   attributes: {
     status: {
@@ -11,7 +11,7 @@ export const deliveryModel: IModelMap = {
       type: Sequelize.STRING,
     },
   },
-  relations: (thisModel: Sequelize.Model<any, any>, { orderModel }) => {
-    thisModel.hasMany(orderModel)
+  relations: (self: Sequelize.Model<any, any>, { order }) => {
+    self.hasMany(order)
   },
 };
