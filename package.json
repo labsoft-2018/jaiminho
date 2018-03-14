@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "nodemon -e ts,graphql -x ts-node src/index.ts",
+    "dev": "env-cmd .env nodemon -e ts,graphql -x ts-node src/index.ts",
     "build": "rimraf dist && tsc",
     "test": "jest --watchAll",
     "commit": "git-cz",
@@ -43,6 +43,7 @@
     "cz-conventional-changelog": "^2.1.0",
     "docker-build-run-push": "^3.0.0",
     "dotenv-cli": "^1.4.0",
+    "env-cmd": "^7.0.0",
     "jest": "^22.2.1",
     "nodemon": "^1.14.12",
     "ts-jest": "^22.0.3",

@@ -9,7 +9,6 @@ export const query = {
     return 'Hello!'
   },
   order: async (parent, { id }: {id: string}, ctx: IContext) => {
-    console.log(id)
     const order = await ctx.components.models.getModels().order.findOne({
       where: {
         id,

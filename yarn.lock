@@ -1223,6 +1223,12 @@ encodeurl@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
 
+env-cmd@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/env-cmd/-/env-cmd-7.0.0.tgz#d1fcfea6e0cbe6bf50b7130221d568907b6349bd"
+  dependencies:
+    cross-spawn "^5.0.1"
+
 err-code@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/err-code/-/err-code-1.1.2.tgz#06e0116d3028f6aef4806849eb0ea6a748ae6960"
