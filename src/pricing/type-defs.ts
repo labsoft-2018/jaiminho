@@ -3,8 +3,8 @@ import commonTypeDefs from '../common/type-defs'
 
 const pricingTypeDefs = gql`
   extend type Query {
-    getPricing(sourceLocation: Location!, destLocation: Location!)
+    getPricing(sourceLocation: InputLocation!, destLocation: InputLocation!): Float!
   }
 `
 
-export default () => [commonTypeDefs, pricingTypeDefs]
+export default () => [pricingTypeDefs]
