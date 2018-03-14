@@ -1,6 +1,6 @@
 import * as graphqlHTTP from 'express-graphql'
 import * as express from 'express'
-import { schema } from './graphql/schema';
+import { buildSchema } from './graphql/schema';
 import { GraphQLSchema } from 'graphql'
 import { IComponents } from '.';
 
@@ -15,6 +15,7 @@ export interface IContext {
   user: IUser
 }
 
+const schema = buildSchema()
 routes.use('/graphql', graphqlHTTP((req: any) => ({
   schema,
   graphiql: true,

@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize'
-import { IModelDescription } from '.';
+import { IModelDescription } from '../models';
+
 export interface ILocation {
   lat: number;
   lng: number;
@@ -8,7 +9,6 @@ export interface IOrder {
   id?: string
   sourceLocation: ILocation
   destLocation: ILocation
-  type: OrderType
   deliveryInstructions: string
   withdrawalInstructions: string
   status: OrderStatus
@@ -23,7 +23,6 @@ export interface IDatabaseOrder {
   sourceLng: number;
   destLat: number;
   destLng: number;
-  type: OrderType;
   deliveryInstructions: string;
   withdrawalInstructions: string;
   contactNumber: string;
@@ -31,11 +30,6 @@ export interface IDatabaseOrder {
   magicWord: string;
   carrierId?: string;
   customerId: string;
-}
-
-export enum OrderType {
-  TAKE_FROM_CLIENT = 'TAKE_FROM_CLIENT',
-  TAKE_TO_CLIENT = 'TAKE_TO_CLIENT',
 }
 
 export enum OrderStatus {
@@ -59,9 +53,6 @@ export const orderModel: IModelDescription = {
     },
     destLng: {
       type: Sequelize.FLOAT,
-    },
-    type: {
-      type: Sequelize.ENUM(Object.keys(OrderType)),
     },
     deliveryInstructions: {
       type: Sequelize.STRING,
