@@ -6,12 +6,14 @@ import { ConfigComponent, ENV, IConfigComponent } from './components/config'
 import { ExpressService, IService } from './components/service';
 import { ModelsComponent, IModelsComponent } from './components/models'
 import { modelDescriptionMap, IModels } from './models'
+import { IHttpClient } from './components/http'
 
 export interface IComponents {
   postgres: IPostgresComponent,
   config: IConfigComponent,
   service: IService,
   models: IModelsComponent<IModels>,
+  http: IHttpClient,
 }
 
 const componentMap: IComponentMap = {

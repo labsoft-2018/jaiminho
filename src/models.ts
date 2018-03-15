@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize'
-import { IDatabaseOrder, orderModel } from './orders/model';
+import { IDatabaseOrder, orderModel, OrderDatabase } from './orders/model'
 import { deliveryModel } from './deliveries/model';
 import { IModelDescriptionMap } from './components/models';
 
@@ -11,7 +11,7 @@ export interface IModelDescription {
 
 export interface IModels {
   delivery: Sequelize.Model<any, any>,
-  order: Sequelize.Model<Sequelize.Instance<IDatabaseOrder>, IDatabaseOrder>
+  order: OrderDatabase
 }
 export const modelDescriptionMap: IModelDescriptionMap = {
   delivery: deliveryModel,

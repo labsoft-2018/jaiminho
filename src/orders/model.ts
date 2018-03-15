@@ -1,20 +1,17 @@
 import * as Sequelize from 'sequelize'
 import { IModelDescription } from '../models';
+import { ILocation } from '../common/model';
 
-export interface ILocation {
-  lat: number;
-  lng: number;
-}
 export interface IOrder {
   id?: string
   sourceLocation: ILocation
   destLocation: ILocation
   deliveryInstructions: string
   withdrawalInstructions: string
+  contactNumber: string
   status: OrderStatus
   magicWord: string
-  carrierId: string
-  customerId: string
+  amount?: number;
 }
 
 export interface IDatabaseOrder {
@@ -28,16 +25,17 @@ export interface IDatabaseOrder {
   contactNumber: string;
   status: OrderStatus;
   magicWord: string;
-  carrierId?: string;
-  customerId: string;
+  amount?: number;
 }
 
 export enum OrderStatus {
-  ORDERED = 'ORDERED',
+  WAITING_PAYMENT_APPROVAL = 'WAITING_PAYMENT_APPROVAL',
   ALLOCATED = 'ALLOCATED',
   CANCELLED = 'CANCELLED',
   DELIVERED = 'DELIVERED',
 }
+
+export type OrderDatabase = Sequelize.Model<Sequelize.Instance<IDatabaseOrder>, IDatabaseOrder>
 
 export const orderModel: IModelDescription = {
   tableName: 'orders',
@@ -69,11 +67,8 @@ export const orderModel: IModelDescription = {
     magicWord: {
       type: Sequelize.STRING,
     },
-    carrierId: {
-      type: Sequelize.STRING,
-    },
-    customerId: {
-      type: Sequelize.STRING,
+    amount: {
+      type: Sequelize.DECIMAL(10, 2), //  not sure
     },
   },
 };

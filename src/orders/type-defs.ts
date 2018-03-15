@@ -11,12 +11,20 @@ const pricingTypeDefs = gql`
   }
 
   # INPUT
-  input CreateOrderInput {
+  input PaymentInfoInput {
+    cardId: String!
+  }
+
+  input OrderInput {
     sourceLocation: InputLocation!
     destLocation: InputLocation!
     deliveryInstructions: String
     withdrawalInstructions: String
     contactNumber: String!
+  }
+  input CreateOrderInput {
+    order: OrderInput!
+    paymentInfo: PaymentInfoInput!
   }
 
   # TYPE
