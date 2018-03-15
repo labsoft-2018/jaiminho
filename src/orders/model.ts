@@ -40,6 +40,11 @@ export type OrderDatabase = Sequelize.Model<Sequelize.Instance<IDatabaseOrder>, 
 export const orderModel: IModelDescription = {
   tableName: 'orders',
   attributes: {
+    id: {
+      primaryKey: true,
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+    },
     sourceLat: {
       type: Sequelize.FLOAT,
     },

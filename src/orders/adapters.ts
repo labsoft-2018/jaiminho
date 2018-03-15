@@ -31,5 +31,6 @@ export const orderToDatabaseOrder = (order: IOrder): IDatabaseOrder => {
     contactNumber: order.contactNumber,
     magicWord: order.magicWord,
     status: order.status,
+    amount: order.amount,
   }
 }

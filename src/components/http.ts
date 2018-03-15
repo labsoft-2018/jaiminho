@@ -9,6 +9,11 @@ export interface IHttpClient {
 export class HttpClient implements IHttpClient, ILifecycle {
   public async get(url: string, params?: object): Promise<any> {
     switch (url) {
+      case 'get-pricing':
+        return {
+          statusCode: 200,
+          body: 100.23,
+        }
       case 'new-payment-request':
       default:
       return {
