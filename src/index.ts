@@ -6,7 +6,7 @@ import { ConfigComponent, ENV, IConfigComponent } from './components/config'
 import { ExpressService, IService } from './components/service';
 import { ModelsComponent, IModelsComponent } from './components/models'
 import { modelDescriptionMap, IModels } from './models'
-import { IHttpClient } from './components/http'
+import { IHttpClient, HttpClient } from './components/http'
 
 export interface IComponents {
   postgres: IPostgresComponent,
@@ -27,11 +27,15 @@ const componentMap: IComponentMap = {
   },
   service: {
     instance: new ExpressService(routes),
-    dependenciesList: ['config', 'postgres', 'models'],
+    dependenciesList: ['config', 'postgres', 'models', 'http'],
   },
   models: {
     instance: new ModelsComponent(modelDescriptionMap),
     dependenciesList: ['postgres'],
+  },
+  http: {
+    instance: new HttpClient(),
+    dependenciesList: [],
   },
 }
 const main = async () => {

@@ -2,7 +2,6 @@ import { IOrder, OrderStatus } from './model'
 import { IComponents } from '..';
 import * as db from './database'
 import * as diplomat from './diplomat'
-import * as R from 'ramda'
 import { IOrderInput, IPaymentInfoInput } from './resolvers/mutation'
 import { v4 } from 'uuid/v4'
 import { PaymentRequestRejected } from './errors';

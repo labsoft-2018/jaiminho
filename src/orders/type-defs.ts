@@ -4,7 +4,7 @@ import commonTypeDefs from '../common/type-defs'
 const pricingTypeDefs = gql`
   # ENUM
   enum OrderStatus {
-    ORDERED
+    WAITING_PAYMENT_APPROVAL
     ALLOCATED
     CANCELLED
     DELIVERED
@@ -50,6 +50,7 @@ const pricingTypeDefs = gql`
     contactNumber: String!
     status: OrderStatus!
     magicWord: String!
+    amount: Float
   }
 
   # EXTENSIONS
