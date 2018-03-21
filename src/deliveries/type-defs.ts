@@ -5,9 +5,8 @@ import orderTypeDefs from '../orders/type-defs'
 const pricingTypeDefs = gql`
   # ENUM
   enum DeliveryStatus {
-    AUCTIONED
-    ACCEPTED
-    FINISHED
+    OPEN    # aceitando orders
+    CLOSED  # nao aceita mais orders
     CANCELLED
   }
   # INPUT
