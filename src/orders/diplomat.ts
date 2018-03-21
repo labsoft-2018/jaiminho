@@ -1,9 +1,9 @@
 import { IOrder } from './model';
-import { IPaymentInfo } from './controller'
 import { IHttpClient } from '../components/http';
 import { ILocation } from '../common/model'
+import { IPaymentInfoInput } from './resolvers/mutation';
 
-export const newPaymentRequest = (http: IHttpClient, paymentInfo: IPaymentInfo, order: IOrder): Promise<boolean> => {
+export const newPaymentRequest = (http: IHttpClient, paymentInfo: IPaymentInfoInput, order: IOrder): Promise<boolean> => {
   return http.get('new-payment-request', {
     cardId: paymentInfo.cardId,
     amount: order.amount,

@@ -23,7 +23,7 @@ routes.use('/graphql', graphqlHTTP((req: any) => ({
     components: req.components,
     user: {
       id: 'user-1',
-      scopes: ['customer']
+      scopes: ['customer'],
     },
   },
 })))
