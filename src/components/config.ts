@@ -19,9 +19,12 @@ export interface IConfig {
   },
   services: IServices
   service: {
-    port: number
-    name: string
-    password: string
+    port: number,
+    name: string,
+    password: string,
+  },
+  google: {
+    apiKey?: string,
   }
 }
 
@@ -50,6 +53,7 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
       POSTGRES_PASSWORD,
       POSTGRES_PORT,
       POSTGRES_HOST,
+      GOOGLE_API_KEY,
     } = process.env
     if (!POSTGRES_DATABASE || !POSTGRES_USERNAME || !POSTGRES_PASSWORD || !POSTGRES_PORT || !POSTGRES_HOST) {
       throw new Error('Provide all database configuration')
@@ -64,12 +68,15 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        auth: 'https://auth.labsoft'  // FIXME
+        auth: 'https://auth.labsoft',  // FIXME
       },
       service: {
         port: 3002,
         name: 'accounts',
-        password: "-e]{.*oS:U~Zz+~qz6VnU's+[1Vf12"
+        password: "-e]{.*oS:U~Zz+~qz6VnU's+[1Vf12",
+      },
+      google: {
+        apiKey: GOOGLE_API_KEY,
       },
     }
     console.log('[Config] Ok!')

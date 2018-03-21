@@ -11,16 +11,21 @@ export interface IUser {
   id: string
   scopes: string[]
 }
+
 export interface IContext {
   components: IComponents
   user: IUser
 }
 
 const userFromReq = (req) => {
-  console.log(req.headers)
-  if (!req.headers || !req.headers.authorization)
-    return null;
-  return jwt.verify(req.headers.authorization, "blah")
+  if (req.headers && req.headers.authorization) {
+    const decoded = jwt.verify(req.headers.authorization, 'blah')
+    return {
+      id: decoded.id,
+      scopes: decoded.scopes || [],
+    }
+  }
+  return null
 }
 
 const schema = buildSchema()
