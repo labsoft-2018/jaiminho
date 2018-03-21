@@ -5,6 +5,10 @@ export enum ENV {
   test,
 }
 
+export interface IServices {
+  auth: string
+}
+
 export interface IConfig {
   postgres: {
     database: string
@@ -13,8 +17,11 @@ export interface IConfig {
     host: string
     port: number,
   },
+  services: IServices
   service: {
-    port: number,
+    port: number
+    name: string
+    password: string
   }
 }
 
@@ -56,8 +63,13 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         port: parseInt(POSTGRES_PORT, 10),
         host: POSTGRES_HOST,
       },
+      services: {
+        auth: 'https://auth.labsoft'  // FIXME
+      },
       service: {
         port: 3002,
+        name: 'accounts',
+        password: "-e]{.*oS:U~Zz+~qz6VnU's+[1Vf12"
       },
     }
     console.log('[Config] Ok!')
