@@ -6,6 +6,7 @@ import { IService } from './components/service';
 import { IModelsComponent } from './components/models'
 import { IModels } from './models'
 import { IHttpClient } from './components/http'
+import { IDistanceService } from './components/distance-api'
 
 export interface IComponents {
   postgres: IPostgresComponent,
@@ -13,6 +14,7 @@ export interface IComponents {
   service: IService,
   models: IModelsComponent<IModels>,
   http: IHttpClient,
+  distanceService: IDistanceService,
 }
 
 const main = async () => {

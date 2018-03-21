@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export enum HttpMethods {
   post = 'post',
-  get = 'get'
+  get = 'get',
 }
 
 export interface IHttpClient {
@@ -32,7 +32,9 @@ export class HttpClient implements IHttpClient, ILifecycle {
 
     return axios({
       ...params,
-      headers: { 'Authorization': this.token, 'Content-Type': 'application/json' }
+      headers: {
+        Authorization: this.token,
+      },
     }).catch((err) => {
       console.log(err)
       // if (err ...) {
