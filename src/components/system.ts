@@ -48,9 +48,10 @@ export class System<T> implements ISystem<T>, ILifecycle {
           [dependencyId]: this.componentMap[dependencyId].instance,
         }), {})
 
+        await instance.start(dependencies)
         startedComponents = {
           ...startedComponents,
-          [componentName]: await instance.start(dependencies),
+          [componentName]: instance,
         }
       }
     } catch (err) {
@@ -58,6 +59,8 @@ export class System<T> implements ISystem<T>, ILifecycle {
       console.log(err)
     }
     console.log('[System] UP!')
+
+    return startedComponents
   }
 
   public stop() {

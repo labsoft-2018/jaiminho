@@ -1,12 +1,11 @@
-
-import { routes } from './routes';
-import { PostgresComponent, IPostgresComponent } from './components/postgres'
-import { IComponentMap, System } from './components/system'
-import { ConfigComponent, ENV, IConfigComponent } from './components/config'
-import { ExpressService, IService } from './components/service';
-import { ModelsComponent, IModelsComponent } from './components/models'
-import { modelDescriptionMap, IModels } from './models'
-import { IHttpClient, HttpClient } from './components/http'
+import { system } from './system'
+import { routes } from './routes'
+import { IPostgresComponent } from './components/postgres'
+import { IConfigComponent } from './components/config'
+import { IService } from './components/service';
+import { IModelsComponent } from './components/models'
+import { IModels } from './models'
+import { IHttpClient } from './components/http'
 
 export interface IComponents {
   postgres: IPostgresComponent,
@@ -16,30 +15,7 @@ export interface IComponents {
   http: IHttpClient,
 }
 
-const componentMap: IComponentMap = {
-  postgres: {
-    instance: new PostgresComponent(),
-    dependenciesList: ['config'],
-  },
-  config: {
-    instance: new ConfigComponent(ENV.dev),
-    dependenciesList: [],
-  },
-  service: {
-    instance: new ExpressService(routes),
-    dependenciesList: ['config', 'postgres', 'models', 'http'],
-  },
-  models: {
-    instance: new ModelsComponent(modelDescriptionMap),
-    dependenciesList: ['postgres'],
-  },
-  http: {
-    instance: new HttpClient(),
-    dependenciesList: [],
-  },
-}
 const main = async () => {
-  const system = new System<IComponents>(componentMap)
   await system.start()
 }
 

@@ -1,30 +1,50 @@
 import { ILifecycle } from './lifecycle'
+import { IComponents } from '../index';
+import { IConfig, IServices } from './config';
+import axios from 'axios'
+
+export enum HttpMethods {
+  post = 'post',
+  get = 'get'
+}
+
 export interface IHttpClient {
-  get(url: string, params?: object): Promise<{
+  fetch({method, url, data}: {method: HttpMethods, url: string, data?: object}): Promise<{
     statusCode: number,
     body: any,
   }>
 }
 
 export class HttpClient implements IHttpClient, ILifecycle {
-  public async get(url: string, params?: object): Promise<any> {
-    switch (url) {
-      case 'get-pricing':
-        return {
-          statusCode: 200,
-          body: 100.23,
-        }
-      case 'new-payment-request':
-      default:
-      return {
-        statusCode: 200,
-        body: 'ok',
-      }
-    }
+  private token: string
+  private config: IConfig
+
+  private async getToken(): Promise<string> {
+    return axios.post(`${this.config.services.auth}/api/services/token`, {
+      'auth/service': this.config.service.name,
+      'auth/password': this.config.service.password,
+    })
+    .then((response) => response['token/jwt'])
   }
 
-  public start() {
-    //  NO_OP
+  public async fetch(params): Promise<any> {
+    this.token = this.token || await this.getToken()
+
+    return axios({
+      ...params,
+      headers: { 'Authorization': this.token, 'Content-Type': 'application/json' }
+    }).catch((err) => {
+      console.log(err)
+      // if (err ...) {
+      //   // Refresh token
+      //   this.token = null
+      //   return this.fetch(params)
+      // }
+    })
+  }
+
+  public start({ config }: IComponents) {
+    this.config = config.getConfig()
   }
 
   public stop() {
