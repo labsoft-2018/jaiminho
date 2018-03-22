@@ -9,6 +9,9 @@ import { modelDescriptionMap } from './models'
 import { HttpClient } from './components/http'
 import { DistanceApi } from './components/distance-api'
 import * as googleDistance from 'google-distance'
+import { S3Component } from './components/s3'
+import * as AWS from 'aws-sdk'
+import { TokenComponent } from './components/token'
 
 const componentMap: IComponentMap = {
   postgres: {
@@ -21,7 +24,7 @@ const componentMap: IComponentMap = {
   },
   service: {
     instance: new ExpressService(routes),
-    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService'],
+    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService', 's3'],
   },
   models: {
     instance: new ModelsComponent(modelDescriptionMap),
@@ -34,6 +37,14 @@ const componentMap: IComponentMap = {
   distanceService: {
     instance: new DistanceApi(googleDistance),
     dependenciesList: ['config'],
+  },
+  s3: {
+    instance: new S3Component(new AWS.S3()),
+    dependenciesList: [],
+  },
+  token: {
+    instance: new TokenComponent(),
+    dependenciesList: ['config', 's3'],
   },
 }
 
