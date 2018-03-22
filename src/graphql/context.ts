@@ -1,7 +1,7 @@
 import { IRequest, IUser } from '../routes'
 
 const userFromReq = async (req: IRequest) => {
-  const authorization = req.headers && req.headers.Authorization as string
+  const authorization = req.headers && req.headers.authorization as string
   if (authorization) {
     const decoded = await req.components.token.decode<IUser>(authorization)
     return {
@@ -13,7 +13,7 @@ const userFromReq = async (req: IRequest) => {
 }
 
 export const reqToContext = async (req: IRequest) => {
-  return {
+  return  {
     components: req.components,
     user: await userFromReq(req),
   }

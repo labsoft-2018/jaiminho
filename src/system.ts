@@ -24,7 +24,7 @@ const componentMap: IComponentMap = {
   },
   service: {
     instance: new ExpressService(routes),
-    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService', 's3'],
+    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService', 's3', 'token'],
   },
   models: {
     instance: new ModelsComponent(modelDescriptionMap),
