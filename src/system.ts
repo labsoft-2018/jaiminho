@@ -50,7 +50,7 @@ const componentMap: IComponentMap = {
   },
   consumer: {
     instance: new ConsumerComponent(new AWS.SQS({
-      region: 'us-east-1'
+      region: 'us-east-1',
     }), deliveryTopicConfigMap),
     dependenciesList: [],
   },
