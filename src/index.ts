@@ -7,6 +7,7 @@ import { IModelsComponent } from './components/models'
 import { IModels } from './models'
 import { IHttpClient } from './components/http'
 import { IDistanceService } from './components/distance-api'
+import { ITokenComponent } from './components/token'
 
 export interface IComponents {
   postgres: IPostgresComponent,
@@ -15,10 +16,11 @@ export interface IComponents {
   models: IModelsComponent<IModels>,
   http: IHttpClient,
   distanceService: IDistanceService,
+  token: ITokenComponent,
 }
 
 const main = async () => {
-  await system.start()
+  const components = await system.start()
 }
 
 main()

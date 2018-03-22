@@ -32,7 +32,7 @@ export class System<T> implements ISystem<T>, ILifecycle {
     this.componentMap = componentMap
   }
 
-  public async start() {
+  public async start(): Promise<T> {
     console.log('[System] Starting...')
     const graph = componentMapToGraph(this.componentMap)
     const sorted = topoSort(graph)
@@ -60,7 +60,7 @@ export class System<T> implements ISystem<T>, ILifecycle {
     }
     console.log('[System] UP!')
 
-    return startedComponents
+    return startedComponents as T
   }
 
   public stop() {

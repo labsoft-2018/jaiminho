@@ -23,6 +23,14 @@ export interface IConfig {
     name: string,
     password: string,
   },
+  token: {
+    issuer: string,
+    audience: string,
+    jwtDuration: string,
+    bucketName: string,
+    publicKeyPath: string,
+    privateKeyPath: string,
+  }
   google: {
     apiKey?: string,
   }
@@ -77,6 +85,14 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
       },
       google: {
         apiKey: GOOGLE_API_KEY,
+      },
+      token: {
+        issuer: 'quack-pack',
+        audience: 'user',
+        jwtDuration: '30d',
+        publicKeyPath: 'test/pubkey.pem',
+        privateKeyPath: 'test/privkey.pem',
+        bucketName: 'labsoft-secrets',
       },
     }
     console.log('[Config] Ok!')
