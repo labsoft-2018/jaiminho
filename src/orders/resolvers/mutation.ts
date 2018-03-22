@@ -23,7 +23,6 @@ export interface ICreateOrderArgs {
 
 export const Mutation = {
   createOrder: async (parent, { input }: ICreateOrderArgs, ctx: IContext) => {
-    console.log(input)
     return createOrder(input.order, input.paymentInfo, ctx.components)
   },
 }

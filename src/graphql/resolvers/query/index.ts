@@ -5,7 +5,6 @@ export const unwrapInstance = <T>(instance: Sequelize.Instance<T> | null): T | n
 
 export const query = {
   hello: (parent, args, ctx: IContext) => {
-    console.log(ctx)
     return 'Hello!'
   },
   order: async (parent, { id }: {id: string}, ctx: IContext) => {

@@ -5,7 +5,7 @@ import { IS3Component } from './s3';
 
 export interface ITokenComponent {
   encode(content: object): Promise<string>
-  decode(token: string): Promise<object>
+  decode<T>(token: string): Promise<T>
 }
 export class TokenComponent implements ILifecycle, ITokenComponent {
   private config: IConfigComponent
@@ -35,7 +35,7 @@ export class TokenComponent implements ILifecycle, ITokenComponent {
     })
   })
 
-  public decode = async (token: string) => new Promise<object>((resolve, reject) => {
+  public decode = async <T>(token: string) => new Promise<T>((resolve, reject) => {
     const tokenConfig = this.config.getConfig().token
     jwt.verify(token, this.publicKey, {
       algorithms: ['RS256'],
@@ -46,7 +46,7 @@ export class TokenComponent implements ILifecycle, ITokenComponent {
         reject(err)
         return
       }
-      resolve(data as object)
+      resolve(data as T)
     })
   })
 
