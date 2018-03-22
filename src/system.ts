@@ -1,9 +1,9 @@
-import { routes } from './routes';
-import { IComponents } from './index';
+import { routes } from './routes'
+import { IComponents } from './index'
 import { PostgresComponent } from './components/postgres'
 import { IComponentMap, System } from './components/system'
 import { ConfigComponent, ENV } from './components/config'
-import { ExpressService } from './components/service';
+import { ExpressService } from './components/service'
 import { ModelsComponent } from './components/models'
 import { modelDescriptionMap } from './models'
 import { HttpClient } from './components/http'
@@ -12,6 +12,8 @@ import * as googleDistance from 'google-distance'
 import { S3Component } from './components/s3'
 import * as AWS from 'aws-sdk'
 import { TokenComponent } from './components/token'
+import { ConsumerComponent } from './components/consumer'
+import { deliveryTopicConfigMap } from './deliveries/diplomat/consumer'
 
 const componentMap: IComponentMap = {
   postgres: {
@@ -45,6 +47,12 @@ const componentMap: IComponentMap = {
   token: {
     instance: new TokenComponent(),
     dependenciesList: ['config', 's3'],
+  },
+  consumer: {
+    instance: new ConsumerComponent(new AWS.SQS({
+      region: 'us-east-1',
+    }), deliveryTopicConfigMap),
+    dependenciesList: [],
   },
 }
 

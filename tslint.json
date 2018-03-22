@@ -10,7 +10,7 @@
     "eofline": true,
     "member-ordering": [false],
     "no-unused-variable": [true, {"ignore-pattern": "^React$"}],
-    "semicolon": false,
+    "semicolon": [true, "never"],
     "no-object-literal-type-assertion": false,
     "no-console": false,
     "no-submodule-imports": false
