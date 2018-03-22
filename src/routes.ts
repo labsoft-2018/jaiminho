@@ -4,6 +4,7 @@ import * as jwt from 'jsonwebtoken'
 import { buildSchema } from './graphql/schema';
 import { GraphQLSchema } from 'graphql'
 import { IComponents } from '.';
+import { reqToContext } from './graphql/context';
 
 export const routes = express.Router()
 
@@ -17,23 +18,13 @@ export interface IContext {
   user: IUser
 }
 
-const userFromReq = (req) => {
-  if (req.headers && req.headers.authorization) {
-    const decoded = jwt.verify(req.headers.authorization, 'blah')
-    return {
-      id: decoded.id,
-      scopes: decoded.scopes || [],
-    }
-  }
-  return null
+export interface IRequest extends express.Request {
+  components: IComponents
 }
 
 const schema = buildSchema()
-routes.use('/graphql', graphqlHTTP((req: any) => ({
+routes.use('/graphql', graphqlHTTP(async (req: IRequest) => ({
   schema,
   graphiql: true,
-  context: {
-    components: req.components,
-    user: userFromReq(req),
-  },
+  context: await reqToContext(req),
 })))
