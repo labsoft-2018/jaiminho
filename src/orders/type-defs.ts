@@ -58,8 +58,15 @@ const pricingTypeDefs = gql`
     order(id: ID!): Order
   }
 
+  input ConfirmOrderInput {
+    magicWord: String
+    orderId: ID!
+  }
+
+
   extend type Mutation {
     createOrder(input: CreateOrderInput!): Order
+    confirmOrder(input: ConfirmOrderInput!): Order
   }
 `
 
