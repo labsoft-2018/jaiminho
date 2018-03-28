@@ -1,31 +1,33 @@
 import * as Sequelize from 'sequelize'
-import { IModelDescription } from '../models';
-import { ILocation } from '../common/model';
+import { IModelDescription } from '../models'
+import { ILocation } from '../common/model'
 
 export interface IOrder {
   id?: string
-  sourceLocation: ILocation
-  destLocation: ILocation
-  deliveryInstructions: string
-  withdrawalInstructions: string
-  contactNumber: string
-  status: OrderStatus
-  magicWord: string
-  amount?: number;
+  sourceLocation?: ILocation
+  destLocation?: ILocation
+  deliveryInstructions?: string
+  withdrawalInstructions?: string
+  contactNumber?: string
+  status?: OrderStatus
+  magicWord?: string
+  amount?: number
+  deliveryId?: string
 }
 
 export interface IDatabaseOrder {
-  id?: string;
-  sourceLat: number;
-  sourceLng: number;
-  destLat: number;
-  destLng: number;
-  deliveryInstructions: string;
-  withdrawalInstructions: string;
-  contactNumber: string;
-  status: OrderStatus;
-  magicWord: string;
-  amount?: number;
+  id?: string
+  sourceLat?: number
+  sourceLng?: number
+  destLat?: number
+  destLng?: number
+  deliveryInstructions?: string
+  withdrawalInstructions?: string
+  contactNumber?: string
+  status?: OrderStatus
+  magicWord?: string
+  amount?: number
+  deliveryId?: string
 }
 
 export enum OrderStatus {
@@ -76,4 +78,4 @@ export const orderModel: IModelDescription = {
       type: Sequelize.DECIMAL(10, 2), //  not sure
     },
   },
-};
+}

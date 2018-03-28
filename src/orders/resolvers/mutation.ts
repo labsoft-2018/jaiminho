@@ -1,6 +1,6 @@
-import { ILocation } from '../../common/model';
-import { IContext } from '../../routes';
-import { createOrder } from '../controller';
+import { ILocation } from '../../common/model'
+import { IContext } from '../../routes'
+import { createOrder } from '../controller'
 
 export interface IPaymentInfoInput {
   cardId: string
@@ -23,6 +23,7 @@ export interface ICreateOrderArgs {
 
 export const Mutation = {
   createOrder: async (parent, { input }: ICreateOrderArgs, ctx: IContext) => {
+    console.log(123)
     return createOrder(input.order, input.paymentInfo, ctx.components)
   },
 }

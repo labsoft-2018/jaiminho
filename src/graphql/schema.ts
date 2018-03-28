@@ -1,10 +1,10 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import * as orders from '../orders'
-import * as deliveries from '../deliveries';
-import * as pricing from '../pricing';
+import * as deliveries from '../deliveries'
+import * as pricing from '../pricing'
 import * as common from '../common'
-import gql from 'graphql-tag';
-import { merge } from 'lodash';
+import gql from 'graphql-tag'
+import { merge } from 'lodash'
 
 const RootTypes = gql`
 type Query {
