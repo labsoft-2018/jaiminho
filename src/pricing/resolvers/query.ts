@@ -1,5 +1,5 @@
 import { IContext } from '../../routes';
-import { combineResolvers, skip } from 'graphql-resolvers'
+import { combineResolvers } from 'graphql-resolvers'
 import { scopes } from '../../interceptors/auth';
 import { getDistance } from '../diplomat';
 import { roundedPricingFromDistance } from '../logic'

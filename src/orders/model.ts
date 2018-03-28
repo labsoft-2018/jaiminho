@@ -4,29 +4,31 @@ import { ILocation } from '../common/model'
 
 export interface IOrder {
   id?: string
-  sourceLocation?: ILocation
-  destLocation?: ILocation
-  deliveryInstructions?: string
-  withdrawalInstructions?: string
-  contactNumber?: string
-  status?: OrderStatus
-  magicWord?: string
-  amount?: number
+  userId: string
+  sourceLocation: ILocation
+  destLocation: ILocation
+  deliveryInstructions: string
+  withdrawalInstructions: string
+  contactNumber: string
+  status: OrderStatus
+  magicWord: string
+  amount?: number;
   deliveryId?: string
 }
 
 export interface IDatabaseOrder {
-  id?: string
-  sourceLat?: number
-  sourceLng?: number
-  destLat?: number
-  destLng?: number
-  deliveryInstructions?: string
-  withdrawalInstructions?: string
-  contactNumber?: string
-  status?: OrderStatus
-  magicWord?: string
-  amount?: number
+  id?: string;
+  userId: string;
+  sourceLat: number;
+  sourceLng: number;
+  destLat: number;
+  destLng: number;
+  deliveryInstructions: string;
+  withdrawalInstructions: string;
+  contactNumber: string;
+  status: OrderStatus;
+  magicWord: string;
+  amount?: number;
   deliveryId?: string
 }
 
@@ -47,6 +49,9 @@ export const orderModel: IModelDescription = {
       primaryKey: true,
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
+    },
+    userId: {
+      type: Sequelize.STRING,
     },
     sourceLat: {
       type: Sequelize.FLOAT,

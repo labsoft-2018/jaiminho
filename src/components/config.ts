@@ -7,6 +7,7 @@ export enum ENV {
 
 export interface IServices {
   auth: string
+  ['new-payment-request']: string
 }
 
 export interface IConfig {
@@ -15,7 +16,7 @@ export interface IConfig {
     username: string
     password: string
     host: string
-    port: number,
+    port: number
   },
   services: IServices
   service: {
@@ -76,7 +77,7 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        auth: 'http://10.144.6.146:8080',  // FIXME
+        ['new-payment-request']: 'https://new-payment-request.labsoft',
       },
       service: {
         port: 3002,
