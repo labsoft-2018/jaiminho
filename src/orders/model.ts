@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize'
-import { IModelDescription } from '../models';
-import { ILocation } from '../common/model';
+import { IModelDescription } from '../models'
+import { ILocation } from '../common/model'
 
 export interface IOrder {
   id?: string
@@ -13,6 +13,7 @@ export interface IOrder {
   status: OrderStatus
   magicWord: string
   amount?: number;
+  deliveryId?: string
 }
 
 export interface IDatabaseOrder {
@@ -28,11 +29,13 @@ export interface IDatabaseOrder {
   status: OrderStatus;
   magicWord: string;
   amount?: number;
+  deliveryId?: string
 }
 
 export enum OrderStatus {
   WAITING_PAYMENT_APPROVAL = 'WAITING_PAYMENT_APPROVAL',
   ALLOCATED = 'ALLOCATED',
+  CLOSED = 'CLOSED',
   CANCELLED = 'CANCELLED',
   DELIVERED = 'DELIVERED',
 }
@@ -81,4 +84,4 @@ export const orderModel: IModelDescription = {
       type: Sequelize.DECIMAL(10, 2), //  not sure
     },
   },
-};
+}

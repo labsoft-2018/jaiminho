@@ -1,6 +1,6 @@
 import { ILifecycle } from './lifecycle'
-import { IComponents } from '../index';
-import { IConfig, IServices } from './config';
+import { IComponents } from '../index'
+import { IConfig, IServices } from './config'
 import axios from 'axios'
 
 export enum HttpMethods {
@@ -19,18 +19,17 @@ export class HttpClient implements IHttpClient, ILifecycle {
   private token: string
   private config: IConfig
 
-  private async getToken(): Promise<string> {
+  public async getToken(): Promise<string> {
     return axios.post(`${this.config.services.auth}/api/services/token`, {
       'auth/service': this.config.service.name,
       'auth/password': this.config.service.password,
     })
-    .then((response) => response['token/jwt'])
+    .then((response) => response.data['token/jwt'])
   }
 
   public async fetch(params): Promise<any> {
     this.token = this.token || await this.getToken()
     params.url = this.config.services[params.url]
-
     return axios({
       ...params,
       headers: {

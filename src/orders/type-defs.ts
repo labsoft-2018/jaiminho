@@ -59,8 +59,15 @@ const pricingTypeDefs = gql`
     isTrackingAuthorized(userId: String, carrierId: String): Boolean
   }
 
+  input ConfirmOrderInput {
+    magicWord: String
+    orderId: ID!
+  }
+
+
   extend type Mutation {
     createOrder(input: CreateOrderInput!): Order
+    confirmOrder(input: ConfirmOrderInput!): Order
   }
 `
 

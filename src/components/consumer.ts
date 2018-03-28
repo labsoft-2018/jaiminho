@@ -4,18 +4,18 @@ import * as Joi from 'joi'
 import * as R from 'ramda'
 import { SQS } from 'aws-sdk'
 
-type ConsumerHandler = (data: object) => Promise<void>
+type ConsumerHandler<T> = (data: object, deps: T) => Promise<void>
 
-export interface ITopicConfig {
-  handler: ConsumerHandler,
+export interface ITopicConfig<T> {
+  handler: ConsumerHandler<T>,
   schema: Joi.Schema,
   consumerInstance?: string,
 }
-export interface ITopicConfigMap {
-  [topicName: string]: ITopicConfig
+export interface ITopicConfigMap<T> {
+  [topicName: string]: ITopicConfig<T>
 }
-export class ConsumerComponent implements ILifecycle {
-  private topicConfigMap: ITopicConfigMap
+export class ConsumerComponent<T> implements ILifecycle {
+  private topicConfigMap: ITopicConfigMap<T>
   private consumer: sqsConsumer
   private sqs: AWS.SQS
 
@@ -36,14 +36,14 @@ export class ConsumerComponent implements ILifecycle {
     return data
   }
 
-  private setupHandler = (queueName: string, handler: ConsumerHandler, schema): sqsConsumer => {
+  private setupHandler = (queueName: string, handler: ConsumerHandler, schema, deps): sqsConsumer => {
     console.log('Setting up ' + queueName)
     const app = sqsConsumer.create({
       queueUrl: this.queueNameToQueueUrl(queueName),
       handleMessage: async (message, done) => {
         try {
           const data = this.parseMessageAndValidate(message, schema)
-          await handler(data)
+          await handler(data, deps)
           done()
         } catch (err) {
           console.log('Error:')
@@ -62,12 +62,12 @@ export class ConsumerComponent implements ILifecycle {
     return app
   }
 
-  public async start() {
+  public async start(deps: any) {
     const topicConfigMap = R.pipe(
       R.toPairs,
       R.map(([queueName, topicConfig]) => ([
         queueName,
-        R.assoc('consumerInstance', this.setupHandler(queueName, topicConfig.handler, topicConfig.schema), topicConfig),
+        R.assoc('consumerInstance', this.setupHandler(queueName, topicConfig.handler, topicConfig.schema, deps), topicConfig),
       ])),
       R.fromPairs,
     )(this.topicConfigMap) as ITopicConfigMap

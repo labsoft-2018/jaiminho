@@ -1,7 +1,7 @@
-import { IOrder } from './model';
 import { IHttpClient, HttpClient, HttpMethods } from '../components/http';
+import { IOrder } from './model'
 import { ILocation } from '../common/model'
-import { IPaymentInfoInput } from './resolvers/mutation';
+import { IPaymentInfoInput } from './resolvers/mutation'
 
 export const newPaymentRequest = (http: IHttpClient, paymentInfo: IPaymentInfoInput, order: IOrder): Promise<boolean> => {
   return http.fetch({

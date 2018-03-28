@@ -1,5 +1,5 @@
 import { IOrder, OrderStatus } from './model'
-import { IComponents } from '..';
+import { IComponents } from '..'
 import * as db from './database'
 import * as diplomat from './diplomat'
 import { IOrderInput, IPaymentInfoInput } from './resolvers/mutation'
@@ -8,6 +8,8 @@ import { PaymentRequestRejected } from './errors';
 import { buildInitialOrderFromInput } from './logic';
 import * as pricingDiplomat from '../pricing/diplomat'
 import { roundedPricingFromDistance } from '../pricing/logic';
+import { PaymentRequestRejected } from './errors'
+import { buildInitialOrderFromInput } from './logic'
 
 const generateMagicWord = () => v4()
 

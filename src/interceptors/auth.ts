@@ -1,10 +1,10 @@
-import { IContext } from '../routes';
+import { IContext } from '../routes'
 import { combineResolvers, skip } from 'graphql-resolvers'
 import * as _ from 'lodash'
 
 const hasScopes = (requiredScopes: string[], userScopes: string[]): boolean => {
   if (!userScopes) {
-    return false;
+    return false
   }
   return _.intersection(requiredScopes, userScopes).length > 0
 }

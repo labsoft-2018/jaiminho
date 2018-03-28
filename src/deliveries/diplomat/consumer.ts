@@ -1,11 +1,6 @@
 import { ITopicConfigMap } from '../../components/consumer'
 import * as Joi from 'joi'
-
-const deliveryClosed = async (data) => {
-  // noop
-  console.log('ok')
-  console.log(data)
-}
+import { IComponents } from '../..'
 
 const deliveryClosedSchema = Joi.object({
   name: Joi.string(),
@@ -19,13 +14,17 @@ const deliveryAllocatedSchema = Joi.object({
   name: Joi.string(),
 })
 
-export const deliveryTopicConfigMap: ITopicConfigMap = {
+export const deliveryTopicConfigMap: ITopicConfigMap<IComponents> = {
   'delivery-closed': {
-    handler: deliveryClosed,
+    handler: async (data, deps) => {
+
+    },
     schema: deliveryClosedSchema,
   },
   'delivery-allocated': {
-    handler: deliveryClosed,
+    handler: async (data, deps) => {
+
+    },
     schema: deliveryClosedSchema,
   },
 }
