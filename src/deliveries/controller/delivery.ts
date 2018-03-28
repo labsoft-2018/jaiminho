@@ -10,7 +10,7 @@ export interface IDelivery {
      status: string,
      origin: ILocation,
      destination: ILocation,
-     createdAt: string,
+     'created-at': string,
    }
  }
 
@@ -18,6 +18,18 @@ export const deliveryAllocated = async (delivery: IDelivery, components: ICompon
   const updateOrders = await components.models.getModels().order.update({
     status: OrderStatus.ALLOCATED,
     deliveryId: delivery.delivery.id,
+  }, {
+    where: {
+      id: {
+        $in: delivery.delivery.orders,
+      },
+    },
+  })
+}
+
+export const deliveryClosed = async (delivery: IDelivery, components: IComponents) => {
+  const updateOrders = await components.models.getModels().order.update({
+    status: OrderStatus.CLOSED,
   }, {
     where: {
       id: {

@@ -1,4 +1,4 @@
-import { ILifecycle } from './lifecycle';
+import { ILifecycle } from './lifecycle'
 export enum ENV {
   dev,
   prod,
@@ -76,12 +76,12 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        auth: 'https://auth.labsoft',  // FIXME
+        auth: 'http://10.144.6.146:8080',  // FIXME
       },
       service: {
         port: 3002,
         name: 'accounts',
-        password: "-e]{.*oS:U~Zz+~qz6VnU's+[1Vf12",
+        password: '123',
       },
       google: {
         apiKey: GOOGLE_API_KEY,
