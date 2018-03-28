@@ -4,6 +4,7 @@ import { ILocation } from '../common/model';
 
 export interface IOrder {
   id?: string
+  userId: string
   sourceLocation: ILocation
   destLocation: ILocation
   deliveryInstructions: string
@@ -16,6 +17,7 @@ export interface IOrder {
 
 export interface IDatabaseOrder {
   id?: string;
+  userId: string;
   sourceLat: number;
   sourceLng: number;
   destLat: number;
@@ -44,6 +46,9 @@ export const orderModel: IModelDescription = {
       primaryKey: true,
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
+    },
+    userId: {
+      type: Sequelize.STRING,
     },
     sourceLat: {
       type: Sequelize.FLOAT,

@@ -29,6 +29,7 @@ export class HttpClient implements IHttpClient, ILifecycle {
 
   public async fetch(params): Promise<any> {
     this.token = this.token || await this.getToken()
+    params.url = this.config.services[params.url]
 
     return axios({
       ...params,
@@ -36,7 +37,8 @@ export class HttpClient implements IHttpClient, ILifecycle {
         Authorization: this.token,
       },
     }).catch((err) => {
-      console.log(err)
+      console.log(err) // FIXME
+      throw err
       // if (err ...) {
       //   // Refresh token
       //   this.token = null

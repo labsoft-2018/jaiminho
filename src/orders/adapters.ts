@@ -3,6 +3,7 @@ import { IDatabaseOrder, IOrder } from './model';
 export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): IOrder => {
   return {
     id: databaseOrder.id,
+    userId: databaseOrder.userId,
     sourceLocation: {
       lat: databaseOrder.sourceLat,
       lng: databaseOrder.destLat,
@@ -22,6 +23,7 @@ export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): IOrder => {
 
 export const orderToDatabaseOrder = (order: IOrder): IDatabaseOrder => {
   return {
+    userId: order.userId,
     destLat: order.destLocation.lat,
     destLng: order.destLocation.lng,
     sourceLat: order.sourceLocation.lat,

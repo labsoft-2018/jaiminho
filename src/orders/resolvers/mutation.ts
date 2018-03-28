@@ -1,3 +1,5 @@
+import { combineResolvers } from 'graphql-resolvers'
+import { scopes } from '../../interceptors/auth';
 import { ILocation } from '../../common/model';
 import { IContext } from '../../routes';
 import { createOrder } from '../controller';
@@ -11,7 +13,7 @@ export interface IOrderInput {
   destLocation: ILocation
   deliveryInstructions: string
   withdrawalInstructions: string
-  contactNumber: string,
+  contactNumber: string
 }
 
 export interface ICreateOrderArgs {
@@ -22,7 +24,10 @@ export interface ICreateOrderArgs {
 }
 
 export const Mutation = {
-  createOrder: async (parent, { input }: ICreateOrderArgs, ctx: IContext) => {
-    return createOrder(input.order, input.paymentInfo, ctx.components)
-  },
+  createOrder: combineResolvers(
+    scopes(['admin', 'costumer']),
+    async (parent, { input }: ICreateOrderArgs, ctx: IContext) => {
+      return createOrder(input.order, input.paymentInfo, ctx.user.id, ctx.components)
+    },
+  )
 }
