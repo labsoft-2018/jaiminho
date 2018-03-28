@@ -1,7 +1,7 @@
 import * as Sequelize from 'sequelize'
 import { IDatabaseOrder, orderModel, OrderDatabase } from './orders/model'
-import { deliveryModel } from './deliveries/model';
-import { IModelDescriptionMap } from './components/models';
+import { deliveryModel } from './deliveries/model'
+import { IModelDescriptionMap } from './components/models'
 
 export interface IModelDescription {
   tableName: string,

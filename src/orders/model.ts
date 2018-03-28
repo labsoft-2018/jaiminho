@@ -33,6 +33,7 @@ export interface IDatabaseOrder {
 export enum OrderStatus {
   WAITING_PAYMENT_APPROVAL = 'WAITING_PAYMENT_APPROVAL',
   ALLOCATED = 'ALLOCATED',
+  CLOSED = 'CLOSED',
   CANCELLED = 'CANCELLED',
   DELIVERED = 'DELIVERED',
 }
