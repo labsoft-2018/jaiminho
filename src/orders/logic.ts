@@ -1,5 +1,5 @@
-import { IOrderInput } from './resolvers/mutation';
-import { IOrder, OrderStatus } from './model';
+import { IOrderInput } from './resolvers/mutation'
+import { IOrder, OrderStatus } from './model'
 import * as R from 'ramda'
 
 export const buildInitialOrderFromInput = (orderInput: IOrderInput, amount: number, userId: string, magicWord: string): IOrder => {
