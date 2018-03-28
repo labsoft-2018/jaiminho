@@ -9,14 +9,14 @@ export enum HttpMethods {
 }
 
 export interface IHttpClient {
-  fetch({method, url, data}: {method: HttpMethods, url: string, data?: object}): Promise<{
+  fetch({method, service, path, data}: {method: HttpMethods, service: string, path: string, data?: object}): Promise<{
     statusCode: number,
     body: any,
   }>
 }
 
 export class HttpClient implements IHttpClient, ILifecycle {
-  private token: string
+  private token: string | null
   private config: IConfig
 
   public async getToken(): Promise<string> {
@@ -27,11 +27,18 @@ export class HttpClient implements IHttpClient, ILifecycle {
     .then((response) => response.data['token/jwt'])
   }
 
-  public async fetch(params): Promise<any> {
+  public async fetch({method, service, path, data}): Promise<any> {
     this.token = this.token || await this.getToken()
-    params.url = this.config.services[params.url]
+
+    const baseUrl = this.config.services[service]
+    if (!baseUrl) {
+      throw new Error(`Service ${service} is invalid`)
+    }
+
     return axios({
-      ...params,
+      url: `${baseUrl}/${path}`,
+      method,
+      data,
       headers: {
         Authorization: this.token,
       },

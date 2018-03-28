@@ -37,7 +37,7 @@ export class ModelsComponent<T> implements IModelsComponent<T>, ILifecycle {
     this.models = modelMap
 
     // !! DANGER !!
-    postgres.getConnection().sync({ force: true })
+    postgres.getConnection().sync({ force: false })
   }
 
   public getModels() {
