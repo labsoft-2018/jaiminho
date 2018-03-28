@@ -43,13 +43,11 @@ export class HttpClient implements IHttpClient, ILifecycle {
         Authorization: this.token,
       },
     }).catch((err) => {
-      console.log(err) // FIXME
-      throw err
-      // if (err ...) {
-      //   // Refresh token
-      //   this.token = null
-      //   return this.fetch(params)
-      // }
+      if (!err.response || err.response.status !== 403) {
+        throw err
+      }
+      this.token = null
+      return this.fetch({method, service, path, data})
     })
   }
 
