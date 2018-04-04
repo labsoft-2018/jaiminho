@@ -36,7 +36,7 @@ export class ConsumerComponent<T> implements ILifecycle {
     return data
   }
 
-  private setupHandler = (queueName: string, handler: ConsumerHandler, schema, deps): sqsConsumer => {
+  private setupHandler = (queueName: string, handler: ConsumerHandler<T>, schema, deps): sqsConsumer => {
     console.log('Setting up ' + queueName)
     const app = sqsConsumer.create({
       queueUrl: this.queueNameToQueueUrl(queueName),

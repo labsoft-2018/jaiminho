@@ -15,10 +15,20 @@ import { TokenComponent } from './components/token'
 import { ConsumerComponent } from './components/consumer'
 import { deliveryTopicConfigMap } from './deliveries/diplomat/consumer'
 import { SQSProducer } from './components/producer'
+import { MockHttpClient } from './components/mock-http'
+import { SERVICES, RESOURCES } from './common/constants'
 
 const sqs = new AWS.SQS({
   region: 'us-east-1',
 })
+
+const mockMap = {
+  [SERVICES.payments]: {
+    [RESOURCES.newPaymentRequest]: {
+      statusCode: 200,
+    },
+  },
+}
 
 const componentMap: IComponentMap = {
   postgres: {
@@ -31,14 +41,14 @@ const componentMap: IComponentMap = {
   },
   service: {
     instance: new ExpressService(routes),
-    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService', 's3', 'token'],
+    dependenciesList: ['config', 'postgres', 'models', 'http', 'distanceService', 's3', 'token', 'sqsProducer'],
   },
   models: {
     instance: new ModelsComponent(modelDescriptionMap),
     dependenciesList: ['postgres'],
   },
   http: {
-    instance: new HttpClient(),
+    instance: new MockHttpClient(mockMap),
     dependenciesList: ['config'],
   },
   distanceService: {

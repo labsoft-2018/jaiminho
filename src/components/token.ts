@@ -1,7 +1,8 @@
-import { ILifecycle } from './lifecycle';
+import { ILifecycle } from './lifecycle'
 import * as jwt from 'jsonwebtoken'
 import { IConfigComponent } from './config'
-import { IS3Component } from './s3';
+import { IS3Component } from './s3'
+import * as fs from 'fs-extra'
 
 export interface ITokenComponent {
   encode(content: object): Promise<string>
@@ -51,13 +52,17 @@ export class TokenComponent implements ILifecycle, ITokenComponent {
   })
 
   public async start({ config, s3 }) {
+    console.log(`starting token`)
     this.config = config
     this.s3 = s3
     const tokenConfig = this.config.getConfig().token
-    const privateKey = await this.s3.getObject(tokenConfig.bucketName, tokenConfig.privateKeyPath)
-    const publicKey = await this.s3.getObject(tokenConfig.bucketName, tokenConfig.publicKeyPath)
+    // const privateKey = await this.s3.getObject(tokenConfig.bucketName, tokenConfig.privateKeyPath)
+    // const publicKey = await this.s3.getObject(tokenConfig.bucketName, tokenConfig.publicKeyPath)
+    const privateKey = fs.readFileSync('/tmp/keys/test/privkey.pem')
+    const publicKey = fs.readFileSync('/tmp/keys/test/pubkey.pem')
     this.privateKey = privateKey
     this.publicKey = publicKey
+    console.log(`token ok`)
   }
 
   public async stop() {

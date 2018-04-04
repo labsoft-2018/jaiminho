@@ -7,7 +7,7 @@ export enum ENV {
 
 export interface IServices {
   auth: string
-  'new-payment-request': string
+  payments: string
 }
 
 export interface IConfig {
@@ -78,8 +78,8 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        'new-payment-request': getServiceUrl('payments', this.env),
-        'auth': getServiceUrl('auth', this.env),
+        payments: getServiceUrl('payments', this.env),
+        auth: getServiceUrl('auth', this.env),
       },
       service: {
         port: 3002,
