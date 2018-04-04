@@ -55,6 +55,7 @@
     "@types/ramda": "^0.25.19",
     "@types/sequelize": "^4.27.8",
     "@types/sqs-consumer": "^3.8.0",
+    "@types/sqs-producer": "^1.5.4",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "docker-build-run-push": "^3.0.0",

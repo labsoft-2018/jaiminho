@@ -16,7 +16,7 @@ export interface IConfig {
     username: string
     password: string
     host: string
-    port: number
+    port: number,
   },
   services: IServices
   service: {
@@ -68,6 +68,7 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
       throw new Error('Provide all database configuration')
     }
 
+    const getServiceUrl = (serviceName, environment) => `http://${serviceName}.${environment}.api.labsoft.host`
     this.config = {
       postgres: {
         database: POSTGRES_DATABASE,
@@ -77,7 +78,8 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        ['new-payment-request']: 'https://new-payment-request.labsoft',
+        ['new-payment-request']: getServiceUrl('payments', this.env),
+        auth: getServiceUrl('auth', this.env),
       },
       service: {
         port: 3002,
