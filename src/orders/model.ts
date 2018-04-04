@@ -5,6 +5,7 @@ import { ILocation } from '../common/model'
 export interface IOrder {
   id: string
   userId?: string
+  carrierId?: string
   sourceLocation: ILocation
   destLocation: ILocation
   deliveryInstructions?: string
@@ -19,6 +20,7 @@ export interface IOrder {
 export interface IDatabaseOrder {
   id?: string
   userId?: string
+  carrierId?: string
   sourceLat?: number
   sourceLng?: number
   destLat?: number
@@ -28,7 +30,6 @@ export interface IDatabaseOrder {
   contactNumber?: string
   status?: OrderStatus
   magicWord?: string
-  amount?: number
   deliveryId?: string
 }
 
