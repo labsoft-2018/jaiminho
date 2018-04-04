@@ -6,13 +6,13 @@ import { IDistanceResponse } from '../src/components/distance-api'
 import * as Big from 'big.js'
 
 describe('orders', () => {
-  it('rounds the price', async () => {
+  it('rounds the price', () => {
     expect(roundedPrice(new Big('10.01'))).toEqual(10.01)
     expect(roundedPrice(new Big('10.0101'))).toEqual(10.01)
     expect(roundedPrice(new Big('10.995'))).toEqual(11)
   })
 
-  it('rounds the response', async () => {
+  it('rounds the response', () => {
     const response = {
       duration: 60,
       distance: 1000,
