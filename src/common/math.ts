@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-export const roundUp = R.curry((precision: number, num: number) => {
-  const exp = Math.pow(10, precision)
-  return Math.ceil(num * exp) / exp
-})
+import * as Big from 'big.js'
+
+export const roundUp = (num: Big) => parseFloat(num.round(2, 1))
