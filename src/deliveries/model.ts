@@ -1,6 +1,5 @@
 import * as Sequelize from 'sequelize'
-import { IModelDescription } from '.';
-import { IModels } from './index'
+import { IModelDescription } from '../models'
 
 export const deliveryModel: IModelDescription = {
   tableName: 'deliveries',
@@ -15,4 +14,4 @@ export const deliveryModel: IModelDescription = {
   relations: (self: Sequelize.Model<any, any>, { order }) => {
     self.hasMany(order)
   },
-};
+}

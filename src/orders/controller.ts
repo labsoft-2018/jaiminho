@@ -8,9 +8,40 @@ import { PaymentRequestRejected } from './errors'
 import { buildInitialOrderFromInput } from './logic'
 import * as pricingDiplomat from '../pricing/diplomat'
 import { roundedPricingFromDistance } from '../pricing/logic'
+import { ISQSProducer } from '../components/producer'
 
 const generateMagicWord = () => v4()
 
+export interface IDeliveryRequestedMessage {
+  order: {
+    id: string,
+    'source-location': {
+      lat: number,
+      lng: number,
+    },
+    'destination-location': {
+      lat: number,
+      lng: number,
+    },
+  }
+}
+
+const deliveryRequestInternalToExternal = (order: IOrder): IDeliveryRequestedMessage => {
+  return {
+    order: {
+      'id': order.id,
+      'source-location': order.sourceLocation,
+      'destination-location': order.destLocation,
+    },
+  }
+}
+
+const produceDeliveryRequested = (producer: ISQSProducer, data: IDeliveryRequestedMessage) => {
+  producer.produceStandard({
+    queueName: 'delivery-requested',
+    data,
+  })
+}
 export const createOrder = async (orderInput: IOrderInput, paymentInfo: IPaymentInfoInput, userId: string, components: IComponents): Promise<IOrder> => {
   const { http, models } = components
   const { order: orderDb } = models.getModels()
@@ -22,5 +53,8 @@ export const createOrder = async (orderInput: IOrderInput, paymentInfo: IPayment
   if (!paymentRequestApproved) {
     throw new PaymentRequestRejected()
   }
+
+  const deliveryRequestedMessage = deliveryRequestInternalToExternal(createdOrder)
+  await produceDeliveryRequested(components.sqsProducer, deliveryRequestedMessage)
   return createdOrder
 }
