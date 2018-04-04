@@ -33,7 +33,7 @@ export interface IConfirmOrder {
 
 export const Mutation = {
   createOrder: combineResolvers(
-    scopes(['admin', 'costumer']),
+    scopes(['admin', 'customer']),
     async (parent, { input }: ICreateOrderArgs, ctx: IContext) => {
       return createOrder(input.order, input.paymentInfo, ctx.user.id, ctx.components)
     },
@@ -57,7 +57,7 @@ export const Mutation = {
 
       const update = await orderModel.update({
         status: OrderStatus.DELIVERED,
-      }, {
+      } as any, {
         where: {
           id: order.get('id'),
         },

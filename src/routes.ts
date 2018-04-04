@@ -5,8 +5,11 @@ import { buildSchema } from './graphql/schema'
 import { GraphQLSchema } from 'graphql'
 import { IComponents } from '.'
 import { reqToContext } from './graphql/context'
+import { makeFormatError } from './graphql/errors'
 
 export const routes = express.Router()
+
+const formatError = makeFormatError()
 
 export interface IUser {
   id: string
@@ -25,10 +28,7 @@ export interface IRequest extends express.Request {
 const schema = buildSchema()
 routes.use('/graphql', graphqlHTTP(async (req: IRequest) => ({
   schema,
-  formatError: (errors) => {
-    console.log(errors)
-    return errors
-  },
+  formatError,
   graphiql: true,
   context: await reqToContext(req),
 })))

@@ -1,8 +1,9 @@
 import { ILifecycle } from './lifecycle'
-import { IComponents } from '../index';
-import { IConfig, IServices } from './config';
+import { IComponents } from '../index'
+import { IConfig, IServices } from './config'
 import axios from 'axios'
 import { ILocation } from '../common/model'
+import * as googleDistance from 'google-distance'
 
 export interface IDistanceResponse {
   duration: number,
@@ -15,17 +16,11 @@ export interface IDistanceService {
 export const formatLocation = (location: ILocation) => `${location.lat},${location.lng}`
 
 export class DistanceApi implements IDistanceService, ILifecycle {
-  private googleDistance: any
-
-  constructor(googleDistance) {
-    this.googleDistance = googleDistance
-  }
-
   public getDistance(sourceLocation: ILocation, destLocation: ILocation): Promise<any> {
     return new Promise((resolve, reject) => {
       const origin = formatLocation(sourceLocation)
       const destination = formatLocation(destLocation)
-      this.googleDistance.get({
+      googleDistance.get({
         origin,
         destination,
       }, (err, data) => {
@@ -44,7 +39,7 @@ export class DistanceApi implements IDistanceService, ILifecycle {
   public start({ config }: IComponents) {
     const apiKey = config.getConfig().google.apiKey
     if (apiKey) {
-      this.googleDistance.apiKey = apiKey
+      googleDistance.apiKey = apiKey
     }
   }
 

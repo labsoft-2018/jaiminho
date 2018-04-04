@@ -2,7 +2,7 @@ import { IOrderInput } from './resolvers/mutation'
 import { IOrder, OrderStatus } from './model'
 import * as R from 'ramda'
 
-export const buildInitialOrderFromInput = (orderInput: IOrderInput, amount: number, userId: string, magicWord: string): IOrder => {
+export const buildInitialOrderFromInput = (orderInput: IOrderInput, amount: number, userId: string, magicWord: string): Partial<IOrder> => {
   return R.merge(orderInput, {
     amount,
     userId,

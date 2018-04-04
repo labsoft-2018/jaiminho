@@ -1,6 +1,6 @@
-import { IDatabaseOrder, IOrder } from './model';
+import { IDatabaseOrder, IOrder } from './model'
 
-export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): IOrder => {
+export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): Partial<IOrder> => {
   return {
     id: databaseOrder.id,
     userId: databaseOrder.userId,

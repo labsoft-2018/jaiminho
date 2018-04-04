@@ -4,7 +4,7 @@ import { ILocation } from '../common/model'
 import { IPaymentInfoInput } from './resolvers/mutation'
 import { SERVICES, RESOURCES } from '../common/constants'
 
-export const newPaymentRequest = (http: IHttpClient, paymentInfo: IPaymentInfoInput, order: IOrder): Promise<boolean> => {
+export const newPaymentRequest = (http: IHttpClient, paymentInfo: IPaymentInfoInput, order: Partial<IOrder>): Promise<boolean> => {
   return http.fetch({
     method: HttpMethods.post,
     service: SERVICES.payments,

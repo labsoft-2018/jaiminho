@@ -8,7 +8,6 @@ import { ModelsComponent } from './components/models'
 import { modelDescriptionMap } from './models'
 import { HttpClient } from './components/http'
 import { DistanceApi } from './components/distance-api'
-import * as googleDistance from 'google-distance'
 import { S3Component } from './components/s3'
 import * as AWS from 'aws-sdk'
 import { TokenComponent } from './components/token'
@@ -52,7 +51,7 @@ const componentMap: IComponentMap = {
     dependenciesList: ['config'],
   },
   distanceService: {
-    instance: new DistanceApi(googleDistance),
+    instance: new DistanceApi(),
     dependenciesList: ['config'],
   },
   s3: {

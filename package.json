@@ -8,7 +8,7 @@
     "start": "ts-node src/index.ts",
     "dev": "env-cmd config/.env nodemon -e ts,graphql -x ts-node src/index.ts",
     "build": "rimraf dist && tsc",
-    "test": "env-cmd .env jest --watchAll",
+    "test": "env-cmd config/.env jest --watchAll --config jest.json",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "docker:build": "docker-build --build-arg NPM_TOKEN=${NPM_TOKEN}",
@@ -38,6 +38,8 @@
     "promise-retry": "^1.1.1",
     "ramda": "^0.25.0",
     "sequelize": "^4.35.2",
+    "sequelize-fixtures": "^0.7.0",
+    "sqlite3": "^4.0.0",
     "sqs-consumer": "^3.8.0",
     "sqs-producer": "^1.6.2",
     "uuid": "^3.2.1"
@@ -68,21 +70,6 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "typescript": "^2.7.1"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node",
-      "graphql"
-    ]
   },
   "config": {
     "commitizen": {

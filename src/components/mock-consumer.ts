@@ -3,11 +3,11 @@ import * as Joi from 'joi'
 import { SQS } from 'aws-sdk'
 import { ITopicConfigMap } from './consumer'
 
-export class ConsumerComponent<T> implements ILifecycle {
+export class MockConsumerComponent<T> implements ILifecycle {
   private topicConfigMap: ITopicConfigMap<T>
   private deps: any
 
-  constructor(_: AWS.SQS, topicConfigMap) {
+  constructor(topicConfigMap) {
     this.topicConfigMap = topicConfigMap
   }
 

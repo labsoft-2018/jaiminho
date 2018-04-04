@@ -21,15 +21,16 @@ export interface IDatabaseOrder {
   id?: string
   userId?: string
   carrierId?: string
-  sourceLat?: number
-  sourceLng?: number
-  destLat?: number
-  destLng?: number
+  sourceLat: number
+  sourceLng: number
+  destLat: number
+  destLng: number
   deliveryInstructions?: string
   withdrawalInstructions?: string
   contactNumber?: string
   status?: OrderStatus
   magicWord?: string
+  amount?: number
   deliveryId?: string
 }
 
@@ -46,11 +47,11 @@ export type OrderDatabase = Sequelize.Model<Sequelize.Instance<IDatabaseOrder>, 
 export const orderModel: IModelDescription = {
   tableName: 'orders',
   attributes: {
-    id: {
-      primaryKey: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-    },
+    // id: {
+    //   primaryKey: true,
+    //   type: Sequelize.UUID,
+    //   defaultValue: Sequelize.UUIDV4,
+    // },
     userId: {
       type: Sequelize.STRING,
     },

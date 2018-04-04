@@ -1,6 +1,6 @@
 import { ILifecycle } from './lifecycle'
-import { IModelDescription } from '../models/index'
 import { IPostgresComponent } from './postgres'
+import { IModelDescription } from '../models'
 
 export interface IModelsComponent<T> {
   getModels(): T
