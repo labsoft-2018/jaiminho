@@ -20,7 +20,9 @@ export class HttpClient implements IHttpClient, ILifecycle {
   private config: IConfig
 
   public async getToken(): Promise<string> {
-    return axios.post(`${this.config.services.auth}/api/services/token`, {
+    const tokenUrl = `${this.config.services.auth}/api/services/token`
+    console.log('getting token', tokenUrl)
+    return axios.post(tokenUrl, {
       'auth/service': this.config.service.name,
       'auth/password': this.config.service.password,
     })
@@ -30,6 +32,8 @@ export class HttpClient implements IHttpClient, ILifecycle {
   public async fetch(params): Promise<any> {
     this.token = this.token || await this.getToken()
     params.url = this.config.services[params.url]
+
+    console.log('http: ' + params.url)
     return axios({
       ...params,
       headers: {

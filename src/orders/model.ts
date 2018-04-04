@@ -3,32 +3,32 @@ import { IModelDescription } from '../models'
 import { ILocation } from '../common/model'
 
 export interface IOrder {
-  id?: string
-  userId: string
+  id: string
+  userId?: string
   sourceLocation: ILocation
   destLocation: ILocation
-  deliveryInstructions: string
-  withdrawalInstructions: string
-  contactNumber: string
-  status: OrderStatus
-  magicWord: string
-  amount?: number;
+  deliveryInstructions?: string
+  withdrawalInstructions?: string
+  contactNumber?: string
+  status?: OrderStatus
+  magicWord?: string
+  amount?: number
   deliveryId?: string
 }
 
 export interface IDatabaseOrder {
-  id?: string;
-  userId: string;
-  sourceLat: number;
-  sourceLng: number;
-  destLat: number;
-  destLng: number;
-  deliveryInstructions: string;
-  withdrawalInstructions: string;
-  contactNumber: string;
-  status: OrderStatus;
-  magicWord: string;
-  amount?: number;
+  id?: string
+  userId?: string
+  sourceLat?: number
+  sourceLng?: number
+  destLat?: number
+  destLng?: number
+  deliveryInstructions?: string
+  withdrawalInstructions?: string
+  contactNumber?: string
+  status?: OrderStatus
+  magicWord?: string
+  amount?: number
   deliveryId?: string
 }
 

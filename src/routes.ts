@@ -25,6 +25,10 @@ export interface IRequest extends express.Request {
 const schema = buildSchema()
 routes.use('/graphql', graphqlHTTP(async (req: IRequest) => ({
   schema,
+  formatError: (errors) => {
+    console.log(errors)
+    return errors
+  },
   graphiql: true,
   context: await reqToContext(req),
 })))

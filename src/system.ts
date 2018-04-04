@@ -14,6 +14,11 @@ import * as AWS from 'aws-sdk'
 import { TokenComponent } from './components/token'
 import { ConsumerComponent } from './components/consumer'
 import { deliveryTopicConfigMap } from './deliveries/diplomat/consumer'
+import { SQSProducer } from './components/producer'
+
+const sqs = new AWS.SQS({
+  region: 'us-east-1',
+})
 
 const componentMap: IComponentMap = {
   postgres: {
@@ -49,9 +54,11 @@ const componentMap: IComponentMap = {
     dependenciesList: ['config', 's3'],
   },
   consumer: {
-    instance: new ConsumerComponent(new AWS.SQS({
-      region: 'us-east-1',
-    }), deliveryTopicConfigMap),
+    instance: new ConsumerComponent(sqs, deliveryTopicConfigMap),
+    dependenciesList: [],
+  },
+  sqsProducer: {
+    instance: new SQSProducer(sqs),
     dependenciesList: [],
   },
 }

@@ -21,16 +21,9 @@ export interface ISQSProducer {
 }
 
 export class SQSProducer implements ILifecycle, ISQSProducer {
-  private region: string
-  private accountId: string
   private sqs: AWS.SQS
 
-  constructor(sqs: AWS.SQS, region: string, accountId: string) {
-    if (!region || !accountId || !sqs) {
-      throw new Error('Missing constructor params')
-    }
-    this.region = region
-    this.accountId = accountId
+  constructor(sqs: AWS.SQS) {
     this.sqs = sqs
   }
 

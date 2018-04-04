@@ -8,6 +8,7 @@ import { IModels } from './models'
 import { IHttpClient } from './components/http'
 import { IDistanceService } from './components/distance-api'
 import { ITokenComponent } from './components/token'
+import { ISQSProducer } from './components/producer'
 
 export interface IComponents {
   postgres: IPostgresComponent,
@@ -17,10 +18,15 @@ export interface IComponents {
   http: IHttpClient,
   distanceService: IDistanceService,
   token: ITokenComponent,
+  sqsProducer: ISQSProducer,
 }
 
 const main = async () => {
   const components = await system.start()
+  console.log(await components.token.encode({
+    id: '1',
+    scopes: ['admin'],
+  }))
 }
 
 main()

@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "env-cmd .env nodemon -e ts,graphql -x ts-node src/index.ts",
+    "dev": "env-cmd config/.env nodemon -e ts,graphql -x ts-node src/index.ts",
     "build": "rimraf dist && tsc",
     "test": "env-cmd .env jest --watchAll",
     "commit": "git-cz",

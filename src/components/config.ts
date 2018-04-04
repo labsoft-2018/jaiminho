@@ -1,8 +1,8 @@
 import { ILifecycle } from './lifecycle'
 export enum ENV {
-  dev,
-  prod,
-  test,
+  dev = 'dev',
+  prod = 'dev',
+  test = 'dev',
 }
 
 export interface IServices {
@@ -45,7 +45,7 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
   private env: ENV
 
   constructor(env: ENV) {
-    this.env = env
+    this.env = env || ENV.dev
   }
 
   public getConfig() {
@@ -78,8 +78,8 @@ export class ConfigComponent implements IConfigComponent, ILifecycle {
         host: POSTGRES_HOST,
       },
       services: {
-        ['new-payment-request']: getServiceUrl('payments', this.env),
-        auth: getServiceUrl('auth', this.env),
+        'new-payment-request': getServiceUrl('payments', this.env),
+        'auth': getServiceUrl('auth', this.env),
       },
       service: {
         port: 3002,
