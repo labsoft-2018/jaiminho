@@ -4,6 +4,7 @@ export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): IOrder => {
   return {
     id: databaseOrder.id,
     userId: databaseOrder.userId,
+    carrierId: databaseOrder.carrierId,
     sourceLocation: {
       lat: databaseOrder.sourceLat,
       lng: databaseOrder.destLat,
@@ -24,6 +25,7 @@ export const databaseOrderToOrder = (databaseOrder: IDatabaseOrder): IOrder => {
 export const orderToDatabaseOrder = (order: IOrder): IDatabaseOrder => {
   return {
     userId: order.userId,
+    carrierId: order.carrierId,
     destLat: order.destLocation.lat,
     destLng: order.destLocation.lng,
     sourceLat: order.sourceLocation.lat,
