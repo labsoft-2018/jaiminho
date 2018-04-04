@@ -27,6 +27,6 @@ export const deliveryTopicConfigMap: ITopicConfigMap<IComponents> = {
     handler: async (data, deps) => {
 
     },
-    schema: deliveryClosedSchema,
+    schema: deliveryAllocatedSchema,
   },
 }
