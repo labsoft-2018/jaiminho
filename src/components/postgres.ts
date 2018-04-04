@@ -23,12 +23,14 @@ export class PostgresComponent implements IPostgresComponent, ILifecycle {
       port,
     } = config.getConfig().postgres
 
+    console.log(host)
+
     this.connection = new Sequelize(database, username, password, {
       host,
       dialect: 'postgres',
       logging: false,
       operatorsAliases: false,
-    });
+    })
     try {
       this.connection.authenticate()
       console.log('[Postgres] Success!')

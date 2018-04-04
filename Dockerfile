@@ -12,5 +12,6 @@ COPY . .
 
 EXPOSE 3002
 
+RUN rm -f .env
 # RUN rm .npmrc
 CMD [ "npm", "start" ]

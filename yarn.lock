@@ -160,6 +160,13 @@
     "@types/node" "*"
     aws-sdk "^2.37.0"
 
+"@types/sqs-producer@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@types/sqs-producer/-/sqs-producer-1.5.4.tgz#f64c3e55b50b6cd64486f585772a833718b01933"
+  dependencies:
+    "@types/node" "*"
+    aws-sdk "^2.37.0"
+
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/strip-bom/-/strip-bom-3.0.0.tgz#14a8ec3956c2e81edb7520790aecf21c290aebd2"
