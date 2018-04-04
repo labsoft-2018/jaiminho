@@ -11,7 +11,7 @@ import { DistanceApi } from './components/distance-api'
 import { S3Component } from './components/s3'
 import * as AWS from 'aws-sdk'
 import { TokenComponent } from './components/token'
-import { ConsumerComponent } from './components/consumer'
+import { MockConsumerComponent } from './components/mock-consumer'
 import { deliveryTopicConfigMap } from './deliveries/diplomat/consumer'
 import { SQSProducer } from './components/producer'
 import { MockHttpClient } from './components/mock-http'
@@ -63,7 +63,7 @@ const componentMap: IComponentMap = {
     dependenciesList: ['config', 's3'],
   },
   consumer: {
-    instance: new ConsumerComponent(sqs, deliveryTopicConfigMap),
+    instance: new MockConsumerComponent(sqs, deliveryTopicConfigMap),
     dependenciesList: [],
   },
   sqsProducer: {
