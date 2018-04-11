@@ -8,10 +8,9 @@ const deliveryClosedSchema = Joi.any()
 const deliveryAllocatedSchema = Joi.any()
 
 export const deliveryTopicConfigMap: ITopicConfigMap<IComponents> = {
-  'delivery-closed': {
+  'delivery-closed.fifo': {
     handler: async (data, deps) => {
       console.log('consuming delivery-closed')
-      console.log(data)
       await deliveryClosed(deliveryObjectToDelivery(data as IDeliveryClosedMessage), deps)
     },
     schema: deliveryClosedSchema,

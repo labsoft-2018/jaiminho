@@ -63,6 +63,7 @@ export class ConsumerComponent<T> implements ILifecycle {
   }
 
   public async start(deps: any) {
+    console.log('Starting consumer')
     const topicConfigMap = R.pipe(
       R.toPairs,
       R.map(([queueName, topicConfig]) => ([
@@ -70,7 +71,7 @@ export class ConsumerComponent<T> implements ILifecycle {
         R.assoc('consumerInstance', this.setupHandler(queueName, topicConfig.handler, topicConfig.schema, deps), topicConfig),
       ])),
       R.fromPairs,
-    )(this.topicConfigMap) as ITopicConfigMap
+    )(this.topicConfigMap) as ITopicConfigMap<T>
 
     this.topicConfigMap = topicConfigMap
   }

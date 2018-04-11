@@ -16,6 +16,7 @@ import { deliveryTopicConfigMap } from './deliveries/diplomat/consumer'
 import { SQSProducer } from './components/producer'
 import { MockHttpClient } from './components/mock-http'
 import { SERVICES, RESOURCES } from './common/constants'
+import { ConsumerComponent } from './components/consumer'
 
 const sqs = new AWS.SQS({
   region: 'us-east-1',
@@ -63,8 +64,8 @@ const componentMap: IComponentMap = {
     dependenciesList: ['config', 's3'],
   },
   consumer: {
-    instance: new MockConsumerComponent(deliveryTopicConfigMap),
-    dependenciesList: [],
+    instance: new ConsumerComponent(sqs, deliveryTopicConfigMap),
+    dependenciesList: ['postgres', 'models'],
   },
   sqsProducer: {
     instance: new SQSProducer(sqs),

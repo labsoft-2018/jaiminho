@@ -2,6 +2,7 @@ import { ILocation } from '../../common/model'
 import { IComponents } from '../..'
 import { OrderStatus } from '../../orders/model'
 import { AnalysisOptions } from 'aws-sdk/clients/cloudsearch'
+import * as Sequelize from 'sequelize'
 
 export interface IDelivery {
   id: string
@@ -20,7 +21,7 @@ export const deliveryAllocated = async (delivery: IDelivery, components: ICompon
   } as any, {
     where: {
       id: {
-        $in: delivery.orders,
+        [Sequelize.Op.in]: delivery.orders,
       },
     },
   })
@@ -34,7 +35,7 @@ export const deliveryClosed = async (delivery: IDelivery, components: IComponent
   } as any, {
     where: {
       id: {
-        $in: delivery.orders,
+        [Sequelize.Op.in]: delivery.orders,
       },
     },
   })

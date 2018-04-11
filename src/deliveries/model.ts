@@ -11,7 +11,4 @@ export const deliveryModel: IModelDescription = {
       type: Sequelize.STRING,
     },
   },
-  relations: (self: Sequelize.Model<any, any>, { order }) => {
-    self.hasMany(order)
-  },
 }

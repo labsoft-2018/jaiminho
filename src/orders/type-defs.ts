@@ -6,6 +6,7 @@ const pricingTypeDefs = gql`
   enum OrderStatus {
     WAITING_PAYMENT_APPROVAL
     ALLOCATED
+    CLOSED
     CANCELLED
     DELIVERED
   }

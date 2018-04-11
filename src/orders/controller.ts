@@ -58,8 +58,9 @@ export const createOrder = async (orderInput: IOrderInput, paymentInfo: IPayment
   await produceDeliveryRequested(components.sqsProducer, deliveryRequestedMessage)
 
   setTimeout(() => {
-    components.sqsProducer.produceStandard({
-      queueName: 'delivery-closed',
+    console.log('producing delivery-closed')
+    components.sqsProducer.produceFifo({
+      queueName: 'delivery-closed.fifo',
       data: {
         delivery: {
           'id': '1',
@@ -68,6 +69,8 @@ export const createOrder = async (orderInput: IOrderInput, paymentInfo: IPayment
           'status': 'CLOSED',
         },
       },
+      groupId: 'delivery-closed',
+      deduplicationId: Math.random().toString(),
     })
   }, 2000)
   return createdOrder

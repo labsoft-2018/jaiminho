@@ -116,5 +116,8 @@ export const orderModel: IModelDescription = {
     carrierId: {
       type: Sequelize.STRING,
     },
+    deliveryId: {
+      type: Sequelize.STRING,
+    },
   },
 }
