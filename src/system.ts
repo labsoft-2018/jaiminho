@@ -63,7 +63,7 @@ const componentMap: IComponentMap = {
     dependenciesList: ['config', 's3'],
   },
   consumer: {
-    instance: new MockConsumerComponent(sqs, deliveryTopicConfigMap),
+    instance: new MockConsumerComponent(deliveryTopicConfigMap),
     dependenciesList: [],
   },
   sqsProducer: {

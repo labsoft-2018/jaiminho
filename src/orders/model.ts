@@ -23,8 +23,10 @@ export interface IDatabaseOrder {
   carrierId?: string
   sourceLat: number
   sourceLng: number
+  sourceAddress: string
   destLat: number
   destLng: number
+  destAddress: string
   deliveryInstructions?: string
   withdrawalInstructions?: string
   contactNumber?: string
@@ -55,17 +57,43 @@ export const orderModel: IModelDescription = {
     userId: {
       type: Sequelize.STRING,
     },
+    sourceLocation: {
+      type: new Sequelize.VIRTUAL(Sequelize.BOOLEAN, ['sourceLat', 'sourceLng', 'sourceAddress']),
+      get() {
+        return {
+          lat: this.get('sourceLat'),
+          lng: this.get('sourceLng'),
+          address: this.get('sourceAddress'),
+        }
+      },
+    },
     sourceLat: {
       type: Sequelize.FLOAT,
     },
     sourceLng: {
       type: Sequelize.FLOAT,
     },
+    sourceAddress: {
+      type: Sequelize.STRING,
+    },
+    destLocation: {
+      type: new Sequelize.VIRTUAL(Sequelize.BOOLEAN, ['destLat', 'destLng', 'destAddress']),
+      get() {
+        return {
+          lat: this.get('destLat'),
+          lng: this.get('destLng'),
+          address: this.get('destAddress'),
+        }
+      },
+    },
     destLat: {
       type: Sequelize.FLOAT,
     },
     destLng: {
       type: Sequelize.FLOAT,
+    },
+    destAddress: {
+      type: Sequelize.STRING,
     },
     deliveryInstructions: {
       type: Sequelize.STRING,
@@ -84,6 +112,9 @@ export const orderModel: IModelDescription = {
     },
     amount: {
       type: Sequelize.DECIMAL(10, 2), //  not sure
+    },
+    carrierId: {
+      type: Sequelize.STRING,
     },
   },
 }

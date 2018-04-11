@@ -1,4 +1,3 @@
-import { IDatabaseOrder, IOrder } from './model'
 import { IDelivery } from './controller/delivery'
 import { ILocation } from '../common/model'
 

@@ -57,6 +57,7 @@ const pricingTypeDefs = gql`
   extend type Query {
     order(id: ID!): Order
     isTrackingAuthorized(userId: String, carrierId: String): Boolean
+    myOrders: [Order]
   }
 
   input ConfirmOrderInput {

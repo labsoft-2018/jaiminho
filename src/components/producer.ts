@@ -34,7 +34,7 @@ export class SQSProducer implements ILifecycle, ISQSProducer {
     // noop
   }
 
-  private buildQueueUrl = (queueName: string) => this.sqs.getQueueUrl({
+  private buildQueueUrl = (queueName: string): Promise<string | undefined> => this.sqs.getQueueUrl({
     QueueName: queueName,
   }).promise().then((data) => data.QueueUrl)
 

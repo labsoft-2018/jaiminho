@@ -56,5 +56,19 @@ export const createOrder = async (orderInput: IOrderInput, paymentInfo: IPayment
 
   const deliveryRequestedMessage = deliveryRequestInternalToExternal(createdOrder)
   await produceDeliveryRequested(components.sqsProducer, deliveryRequestedMessage)
+
+  setTimeout(() => {
+    components.sqsProducer.produceStandard({
+      queueName: 'delivery-closed',
+      data: {
+        delivery: {
+          'id': '1',
+          'carrier-id': '1',
+          'orders': [createdOrder.id],
+          'status': 'CLOSED',
+        },
+      },
+    })
+  }, 2000)
   return createdOrder
 }
