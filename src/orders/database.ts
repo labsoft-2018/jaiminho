@@ -16,10 +16,11 @@ export const getOrderById = async (orderDb: OrderDatabase, id: string): Promise<
   return databaseOrderToOrder(order.toJSON())
 }
 
-export const getAllocatedOrdersByUserId = async (orderDb: OrderDatabase, userId: string): Promise<void[]> => {
+export const getAllocatedOrders = async (orderDb: OrderDatabase, userId: string, carrierId: string): Promise<void[]> => {
   const order = await orderDb.findAll({
     where: {
       userId,
+      carrierId,
       status: OrderStatus.ALLOCATED,
     },
   })
