@@ -21,12 +21,12 @@ export interface IDatabaseOrder {
   id?: string
   userId?: string
   carrierId?: string
-  sourceLat: number
-  sourceLng: number
-  sourceAddress: string
-  destLat: number
-  destLng: number
-  destAddress: string
+  sourceLat?: number
+  sourceLng?: number
+  sourceAddress?: string
+  destLat?: number
+  destLng?: number
+  destAddress?: string
   deliveryInstructions?: string
   withdrawalInstructions?: string
   contactNumber?: string
