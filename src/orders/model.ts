@@ -3,7 +3,7 @@ import { IModelDescription } from '../models'
 import { ILocation } from '../common/model'
 
 export interface IOrder {
-  id: string
+  id?: string
   userId?: string
   carrierId?: string
   sourceLocation: ILocation

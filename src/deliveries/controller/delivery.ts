@@ -27,15 +27,22 @@ export const deliveryAllocated = async (delivery: IDelivery, components: ICompon
 }
 
 export const deliveryClosed = async (delivery: IDelivery, components: IComponents) => {
-  return components.models.getModels().order.update({
-    status: OrderStatus.CLOSED,
-    carrierId: delivery.carrierId,
-    deliveryId: delivery.id,
-  } as any, {
-    where: {
-      id: {
-        $in: delivery.orders,
+  return components.postgres.getConnection().transaction(async (transaction) => {
+    await components.models.getModels().delivery.insertOrUpdate({
+      status: OrderStatus.CLOSED,
+      carrierId: delivery.carrierId,
+    }, {transaction})
+    await components.models.getModels().order.update({
+      status: OrderStatus.CLOSED,
+      carrierId: delivery.carrierId,
+      deliveryId: delivery.id,
+    }, {
+      where: {
+        id: {
+          $in: delivery.orders,
+        },
       },
-    },
+      transaction,
+    })
   })
 }
